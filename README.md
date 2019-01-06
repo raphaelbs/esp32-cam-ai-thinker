@@ -8,7 +8,7 @@ The goal of this repository is to centralize information and examples for the A.
 
 This board and the included OV2640 can acomplish the following:
 
-- External 64MBit PSRAM
+- External 64MBit PSRAM ([IPUS IPS6404](./assets/IPUS_IPS6404_Datasheet.pdf))
 - Embeed flash light
 - Sd Card
   - mount using FatFS

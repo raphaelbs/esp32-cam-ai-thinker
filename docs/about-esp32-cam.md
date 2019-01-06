@@ -2,7 +2,10 @@
 
 This document refers to the board itself and its hardware features.
 
-You can read the basic datasheet [here](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/index.html).
+- [Board datasheet](../assets/ESP32-CAM_Product_Specification.pdf)
+- [IPUS IPS6404 datasheet](../assets/IPUS_IPS6404_Datasheet.pdf): external memory
+- [OV2640 datasheet](../assets/OV2640_Datasheet.pdf): included camera
+  - [OV2640 FSL package](../assets/OV2640FSL_Datasheet.pdf)
 
 # PINs
 

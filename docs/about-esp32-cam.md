@@ -1,4 +1,4 @@
-# ESP32-CAM A.I. Thinker
+# About ESP32-CAM
 
 This document refers to the board itself and its hardware features.
 

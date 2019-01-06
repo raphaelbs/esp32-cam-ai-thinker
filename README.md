@@ -1,6 +1,6 @@
 # A.I. Thinker ESP32-CAM
 
-The goal of this repository is to centralize information and examples for the A.I. Thinker ESP32-CAM.
+The goal of this repository is to centralize information and examples for the A.I. Thinker ESP32-CAM ([check it specifications here](./docs/about-esp32-cam.md)).
 
 <img src="https://www.open-electronics.org/wp-content/uploads/2018/10/ESP32-CAM.jpg" width="auto" height="200" alt="A.I. Thinker ESP32-CAM" />
 

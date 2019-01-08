@@ -1,8 +1,8 @@
-# A.I. Thinker ESP32-CAM
+# ESP32-CAM - A.I. Thinker 
 
-The goal of this repository is to centralize information and examples for the A.I. Thinker ESP32-CAM ([check it specifications here](./docs/about-esp32-cam.md)).
+The goal of this repository is to centralize information and examples for the ESP32-CAM A.I. Thinker ([check it specifications here](./docs/about-esp32-cam.md)).
 
-<img src="https://www.open-electronics.org/wp-content/uploads/2018/10/ESP32-CAM.jpg" width="auto" height="200" alt="A.I. Thinker ESP32-CAM" />
+<img src="https://www.open-electronics.org/wp-content/uploads/2018/10/ESP32-CAM.jpg" width="auto" height="200" alt="ESP32-CAM - A.I. Thinker" />
 
 # Capabilities
 
@@ -29,6 +29,30 @@ This board and the included OV2640 can acomplish the following:
     - Scaling image output
   - Power down mode
   - Strobe (flash control)
+
+# Flashing
+
+## Requirements
+To flash the board you need a USB to TTL dongle.
+
+Also it is very important to **use a external power supply**. USBs usually do not provide sufficient current which makes the board loops `brownout` errors.
+
+## Wiring
+
+> ![schematics to wire the board](./assets/Wiring-with-usb-ttl.png)
+> Diagram to wire the board
+
+## Instructions
+
+When flashing:
+
+1. turn the board down
+2. hold the reset button (short `GPIO0` to `GND`)
+3. turn the board on
+
+When booting to run your sketch keep `GPIO0` open.
+
+This board also has a built in reset button.
 
 # Examples
 

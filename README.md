@@ -1,8 +1,11 @@
 # ESP32-CAM - A.I. Thinker 
 
-The goal of this repository is to centralize information and examples for the ESP32-CAM A.I. Thinker ([check it specifications here](./docs/about-esp32-cam.md)).
+The goal of this repository is to centralize information and examples for the ESP32-CAM A.I. Thinker.
 
-<img src="https://www.open-electronics.org/wp-content/uploads/2018/10/ESP32-CAM.jpg" width="auto" height="200" alt="ESP32-CAM - A.I. Thinker" />
+[Read the board and periferals specifications here.](./docs/about-esp32-cam.md)
+
+> <img src="https://www.open-electronics.org/wp-content/uploads/2018/10/ESP32-CAM.jpg" width="auto" height="200" alt="ESP32-CAM - A.I. Thinker" /><br/>
+> ESP32-CAM A.I. Thinker usually sells with OV2640 sensor
 
 # Capabilities
 
@@ -39,7 +42,7 @@ Also it is very important to **use a external power supply**. USBs usually do no
 
 ## Wiring
 
-> ![schematics to wire the board](./assets/Wiring-with-usb-ttl.png)
+> ![schematics to wire the board](./assets/Wiring-with-usb-ttl.png)<br />
 > Diagram to wire the board
 
 ## Instructions

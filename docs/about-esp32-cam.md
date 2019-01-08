@@ -9,18 +9,18 @@ This document refers to the board itself and its hardware features.
 
 # PINs
 
-#### Internal pins table
+> ![internal pins](../assets/esp32-cam-camera-flash-sd-pins.jpg)<br />
+> Internal pins table
 
-![internal pins](../assets/esp32-cam-camera-flash-sd-pins.jpg)
+> ![external pins](../assets/esp32-cam-pins.jpg)<br />
+> External pins layout
 
-#### External pins layout
+# ESP32s
 
-![external pins](../assets/esp32-cam-pins.jpg)
-
-#### Mounted ESP32s
-
-![mounted ESP32s](../assets/esp32s.jpg)
+> ![mounted ESP32s](../assets/esp32s.jpg)<br />
+> Mounted ESP32s
 
 # Dimensions
 
-![board dimensions](../assets/esp32-cam-dimensions.jpg)
+> ![board dimensions](../assets/esp32-cam-dimensions.jpg)<br />
+> board dimensions

@@ -98,18 +98,8 @@ static esp_err_t jpg_httpd_handler(httpd_req_t *req)
 
   if (res == ESP_OK)
   {
-    if (fb->format == PIXFORMAT_JPEG)
-    {
-      fb_len = fb->len;
-      res = httpd_resp_send(req, (const char *)fb->buf, fb->len);
-    }
-    else
-    {
-      jpg_chunking_t jchunk = {req, 0};
-      res = frame2jpg_cb(fb, 80, jpg_encode_stream, &jchunk) ? ESP_OK : ESP_FAIL;
-      httpd_resp_send_chunk(req, NULL, 0);
-      fb_len = jchunk.len;
-    }
+    fb_len = fb->len;
+    res = httpd_resp_send(req, (const char *)fb->buf, fb->len);
   }
   esp_camera_fb_return(fb);
   int64_t fr_end = esp_timer_get_time();

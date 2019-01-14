@@ -1,5 +1,7 @@
 # Example http_jpg
 
+Creates a http server and listen to `GET` requests at `http://[board-ip]/jpg`. When the request is triggered, it returns a UXGA JPEG image from the camera.
+
 ## Instructions
 
 In order to run this example, you need to update your `esp-idf` repository to the main branch because it relies uppon `esp_http_server` which aren't released to this date.
@@ -12,7 +14,7 @@ All camera pins are configured by default accordingly to [this A.I. Thinker docu
 
 ## Notes
 
-Make sure to read [sdconfig.defaults](./sdconfig.defaults) file to get a grasp of required configurations to enable `PSRAM` and set it to 64MBit.
+Make sure to read [sdconfig.defaults](./sdconfig.defaults) file to get a grasp of required configurations to enable `PSRAM` and set it to `64MBit`.
 
 ## Demo
 

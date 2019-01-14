@@ -1,4 +1,4 @@
-# ESP32-CAM - A.I. Thinker 
+# ESP32-CAM - A.I. Thinker
 
 The goal of this repository is to centralize information and examples for the ESP32-CAM A.I. Thinker.
 
@@ -36,6 +36,7 @@ This board and the included OV2640 can acomplish the following:
 # Flashing
 
 ## Requirements
+
 To flash the board you need a USB to TTL dongle.
 
 Also it is very important to **use a external power supply**. USBs usually do not provide sufficient current which makes the board loops `brownout` errors.
@@ -62,6 +63,7 @@ This board also has a built in reset button.
 To run the examples, make sure to have `xtensa` and `esp-idf` configured in your machine. If you haven't, refer to [this tutorial](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/index.html).
 
 - [JPG via Http server](./examples/http_jpg)
+- [Store pictures in SD](./examples/sd_jpg)
 
 # Contributions
 

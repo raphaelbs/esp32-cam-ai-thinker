@@ -960,9 +960,9 @@ esp_err_t camera_probe(const camera_config_t *config, camera_model_t *out_camera
     gpio_config(&conf);
 
     gpio_set_level(config->pin_reset, 1);
-    vTaskDelay(3000 / portTICK_PERIOD_MS);
+    vTaskDelay(10 / portTICK_PERIOD_MS);
     gpio_set_level(config->pin_reset, 0);
-    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    vTaskDelay(10 / portTICK_PERIOD_MS);
   }
   else
   {

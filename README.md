@@ -36,7 +36,7 @@ When flashing:
 2. hold the reset button (short `GPIO0` to `GND`)
 3. turn the board on
 
-When booting to run your sketch keep `GPIO0` open.
+When booting to run your sketch, keep `GPIO0` open.
 
 This board also has a built in reset button.
 

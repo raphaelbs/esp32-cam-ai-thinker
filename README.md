@@ -7,31 +7,13 @@ The goal of this repository is to centralize information and examples for the ES
 > <img src="https://www.open-electronics.org/wp-content/uploads/2018/10/ESP32-CAM.jpg" width="auto" height="200" alt="ESP32-CAM - A.I. Thinker" /><br/>
 > ESP32-CAM A.I. Thinker usually sells with OV2640 sensor
 
-# Capabilities
+# Examples
 
-This board and the included OV2640 can acomplish the following:
+To run the examples, make sure to have `xtensa` and `esp-idf` configured in your machine. If you haven't, refer to [this tutorial](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/index.html).
 
-- External 64MBit PSRAM ([IPUS IPS6404](./assets/IPUS_IPS6404_Datasheet.pdf))
-- Embeed flash light
-- Sd Card
-  - mount using FatFS
-- Ov2640
-  - Native resolutions:
-    - UXGA
-    - SVGA
-    - CIF
-  - Gain control
-  - Balance control
-  - Windowing
-    - Zoom and panning modes
-    - Sub-sampling mode
-      - Svga
-      - Cif
-  - Frame exposure mode
-  - Output formatter
-    - Scaling image output
-  - Power down mode
-  - Strobe (flash control)
+- [Store pictures using Firebase (Google Storage) :new:](./examples/google_storage)
+- [Store pictures in SD](./examples/sd_jpg)
+- [JPG via Http server](./examples/http_jpg)
 
 # Flashing
 
@@ -58,12 +40,31 @@ When booting to run your sketch keep `GPIO0` open.
 
 This board also has a built in reset button.
 
-# Examples
+# Capabilities
 
-To run the examples, make sure to have `xtensa` and `esp-idf` configured in your machine. If you haven't, refer to [this tutorial](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/index.html).
+This board and the included OV2640 can acomplish the following:
 
-- [JPG via Http server](./examples/http_jpg)
-- [Store pictures in SD](./examples/sd_jpg)
+- External 64MBit PSRAM ([IPUS IPS6404](./assets/IPUS_IPS6404_Datasheet.pdf))
+- Embeed flash light
+- Sd Card
+  - mount using FatFS
+- Ov2640
+  - Native resolutions:
+    - UXGA
+    - SVGA
+    - CIF
+  - Gain control
+  - Balance control
+  - Windowing
+    - Zoom and panning modes
+    - Sub-sampling mode
+      - Svga
+      - Cif
+  - Frame exposure mode
+  - Output formatter
+    - Scaling image output
+  - Power down mode
+  - Strobe (flash control)
 
 # Contributions
 

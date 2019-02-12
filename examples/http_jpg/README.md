@@ -14,7 +14,7 @@ All camera pins are configured by default accordingly to [this A.I. Thinker docu
 
 ## Notes
 
-Make sure to read [sdconfig.defaults](./sdconfig.defaults) file to get a grasp of required configurations to enable `PSRAM` and set it to `64MBit`.
+Make sure to read [sdkconfig.defaults](./sdkconfig.defaults) file to get a grasp of required configurations to enable `PSRAM` and set it to `64MBit`.
 
 ## Demo
 

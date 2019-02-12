@@ -129,4 +129,4 @@ Besides setting your WiFi SSID and Password via `make menuconfig` or directly in
 
 All camera pins are configured by default accordingly to [this A.I. Thinker document](../../assets/ESP32-CAM_Product_Specification.pdf) and you can check then inside [Kconfig.projbuild](./main/Kconfig.projbuild).
 
-Make sure to read [sdconfig.defaults](./sdconfig.defaults) file to get a grasp of required configurations to enable `PSRAM` and set it to `64MBit`.
+Make sure to read [sdkconfig.defaults](./sdkconfig.defaults) file to get a grasp of required configurations to enable `PSRAM` and set it to `64MBit`.

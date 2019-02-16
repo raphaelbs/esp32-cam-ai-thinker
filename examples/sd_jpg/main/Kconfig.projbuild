@@ -1,4 +1,4 @@
-menu "Http_jpg example configuration"
+menu "Example configuration"
 
 config XCLK_FREQ
   int "XCLK Frequency"

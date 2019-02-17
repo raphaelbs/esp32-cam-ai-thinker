@@ -5,14 +5,13 @@
 
 #include "google_api.h"
 
-static const char *TAG = "gcp:http_handler";
 static char *http_buffer = NULL;
 static esp_err_t http_status;
 static esp_err_t (*_http_cb)(esp_err_t status, cJSON *json);
 
 static esp_err_t parse_http_buffer(esp_http_client_event_t *evt)
 {
-  ESP_LOGI(TAG, "Http buffer:\n\t%s", http_buffer);
+  ESP_LOGD(TAG, "Http buffer:\n\t%s", http_buffer);
   cJSON *json = cJSON_Parse(http_buffer);
   if (json == NULL)
   {
@@ -47,9 +46,9 @@ static esp_err_t gcp_http_event_handler(esp_http_client_event_t *evt)
     }
     else
     {
-      ESP_LOGE(TAG, "Handling unchunked message");
+      ESP_LOGD(TAG, "Handling unchunked message");
     }
-    ESP_LOGI(TAG, "HTTP_EVENT_ON_DATA, len=%d", evt->data_len);
+    ESP_LOGD(TAG, "HTTP_EVENT_ON_DATA, len=%d", evt->data_len);
     if (http_buffer)
     {
       const size_t buffer_size = strlen(http_buffer);
@@ -74,11 +73,11 @@ static esp_err_t gcp_http_event_handler(esp_http_client_event_t *evt)
     ESP_LOGD(TAG, "Chunk of http buffer:\n\t%s", http_buffer);
     break;
   case HTTP_EVENT_ON_FINISH:
-    ESP_LOGI(TAG, "HTTP_EVENT_ON_FINISH");
+    ESP_LOGD(TAG, "HTTP_EVENT_ON_FINISH");
     http_status = parse_http_buffer(evt);
     break;
   case HTTP_EVENT_DISCONNECTED:
-    ESP_LOGI(TAG, "HTTP_EVENT_DISCONNECTED");
+    ESP_LOGD(TAG, "HTTP_EVENT_DISCONNECTED");
     free(http_buffer);
     http_buffer = NULL;
     break;
@@ -98,6 +97,6 @@ void gcp_clean_access_token()
   if (ACCESS_TOKEN)
   {
     free(ACCESS_TOKEN);
-    ESP_LOGI(TAG, "ACCESS_TOKEN cleaned!");
+    ESP_LOGW(TAG, "ACCESS_TOKEN cleaned!");
   }
 }

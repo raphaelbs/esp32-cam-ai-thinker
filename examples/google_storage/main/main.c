@@ -16,15 +16,11 @@
 #include "esp_camera.h"
 #include "google_api.h"
 
-static const char *TAG = "example:google_storage";
-
 #define WIFI_CONNECTED BIT0
 #define SYNC_NTP BIT1
 #define HAS_AUTH_TOKEN BIT2
 
 static EventGroupHandle_t eventGroup;
-static struct tm timeinfo = {0};
-static time_t now = 0;
 
 static camera_config_t camera_config = {
     .pin_pwdn = -1,
@@ -57,19 +53,6 @@ static camera_config_t camera_config = {
     .fb_count = 1       //if more than one, i2s runs in continuous mode. Use only with JPEG
 };
 
-static esp_err_t init_camera()
-{
-  //initialize the camera
-  esp_err_t err = esp_camera_init(&camera_config);
-  if (err != ESP_OK)
-  {
-    ESP_LOGE(TAG, "Camera Init Failed");
-    return err;
-  }
-
-  return ESP_OK;
-}
-
 static void clear_auth_token()
 {
   xEventGroupClearBits(eventGroup, HAS_AUTH_TOKEN);
@@ -81,6 +64,8 @@ static void take_picture_and_upload_to_google_storage()
   ESP_LOGI(TAG, "Taking picture...");
   camera_fb_t *pic = esp_camera_fb_get();
 
+  struct tm timeinfo = {0};
+  time_t now = 0;
   time(&now);
   localtime_r(&now, &timeinfo);
   char *pic_name = malloc(sizeof("YYYY-mm-dd_hh-MM-ss.jpg"));
@@ -117,6 +102,8 @@ static void task_gcp()
     if (bit == WIFI_CONNECTED)
     {
       initialize_sntp();
+      struct tm timeinfo = {0};
+      time_t now = 0;
       int retry = 0;
       const int retry_count = 10;
       while (timeinfo.tm_year < (2016 - 1900) && ++retry < retry_count)
@@ -126,7 +113,7 @@ static void task_gcp()
         time(&now);
         localtime_r(&now, &timeinfo);
       }
-      ESP_LOGI(TAG, "Date from NTP:\n\t%04d-%02d-%02d_%02d-%02d-%02d", timeinfo.tm_year + 1900, timeinfo.tm_mon + 1, timeinfo.tm_mday, timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
+      ESP_LOGI(TAG, "Date from NTP:\t%04d-%02d-%02d_%02d-%02d-%02d", timeinfo.tm_year + 1900, timeinfo.tm_mon + 1, timeinfo.tm_mday, timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
       ESP_LOGI(TAG, "Set SYNC_NTP");
       xEventGroupSetBits(eventGroup, SYNC_NTP);
     }
@@ -205,7 +192,7 @@ void app_main()
     ESP_ERROR_CHECK(err);
   }
   eventGroup = xEventGroupCreate();
-  init_camera();
+  ESP_ERROR_CHECK(esp_camera_init(&camera_config));
   initialise_wifi();
   xTaskCreate(&task_gcp, "task_gcp", 12096, NULL, 10, NULL);
 }

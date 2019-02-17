@@ -5,7 +5,6 @@
 
 #include "google_api.h"
 
-static const char *TAG = "gcp_storage_insert_object";
 static esp_err_t http_status;
 
 static esp_err_t http_handler_cb(esp_err_t status, cJSON *json)
@@ -41,7 +40,7 @@ esp_err_t gcp_check_bucket_access()
   esp_err_t err = esp_http_client_perform(http_client);
   if (err == ESP_OK)
   {
-    ESP_LOGW(TAG, "Status = %d", esp_http_client_get_status_code(http_client));
+    ESP_LOGI(TAG, "Status = %d", esp_http_client_get_status_code(http_client));
   }
   esp_http_client_cleanup(http_client);
 

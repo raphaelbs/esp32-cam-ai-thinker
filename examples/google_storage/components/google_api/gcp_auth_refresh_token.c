@@ -5,7 +5,6 @@
 
 #include "google_api.h"
 
-static const char *TAG = "gcp_auth_refresh_token";
 static esp_err_t http_status;
 
 static esp_err_t http_handler_cb(esp_err_t status, cJSON *json)
@@ -20,9 +19,11 @@ static esp_err_t http_handler_cb(esp_err_t status, cJSON *json)
   cJSON *access_token = cJSON_GetObjectItem(json, "access_token");
   if (cJSON_IsString(access_token) && access_token->valuestring)
   {
-    ESP_LOGI(TAG, "Parse OK.\n\tAccess_token:\n\t\"%s\"", access_token->valuestring);
-    ACCESS_TOKEN = malloc(strlen(access_token->valuestring));
-    memcpy(ACCESS_TOKEN, access_token->valuestring, strlen(access_token->valuestring));
+    size_t token_size = strlen(access_token->valuestring);
+    ACCESS_TOKEN = malloc(7 + token_size);
+    memcpy(ACCESS_TOKEN, "Bearer ", 7);
+    memcpy(ACCESS_TOKEN + 7, access_token->valuestring, token_size);
+    ESP_LOGI(TAG, "Access_token:\t\"%s\"", access_token->valuestring);
     return ESP_OK;
   }
   ESP_LOGE(TAG, "Parse FAIL!");
@@ -45,13 +46,13 @@ esp_err_t gcp_auth_refresh_token()
       .method = HTTP_METHOD_POST};
   esp_http_client_handle_t http_client = esp_http_client_init(&config);
   esp_http_client_set_post_field(http_client, post_data, strlen(post_data));
-  ESP_LOGI(TAG, "Len: %i, Body: \n\t%s", strlen(post_data), post_data);
+  ESP_LOGD(TAG, "Len: %i, Body:\n\t%s", strlen(post_data), post_data);
   esp_http_client_set_header(http_client, "Content-Type", "application/x-www-form-urlencoded");
 
   esp_err_t err = esp_http_client_perform(http_client);
   if (err == ESP_OK)
   {
-    ESP_LOGW(TAG, "Status = %d", esp_http_client_get_status_code(http_client));
+    ESP_LOGI(TAG, "Status = %d", esp_http_client_get_status_code(http_client));
   }
   esp_http_client_cleanup(http_client);
 

@@ -12,6 +12,7 @@
 #include <esp_http_client.h>
 
 char *ACCESS_TOKEN;
+const static char *TAG = "example_google_storage";
 
 void gcp_clean_access_token();
 

@@ -5,7 +5,6 @@
 
 #include "google_api.h"
 
-static const char *TAG = "gcp_storage_insert_object";
 static esp_err_t http_status;
 
 static esp_err_t http_handler_cb(esp_err_t status, cJSON *json)
@@ -24,11 +23,9 @@ esp_err_t gcp_storage_insert_object(const char *pic_name, const char *binary, si
 {
   ESP_LOGI(TAG, "Insert object [%s] in bucket [%s]...", pic_name, CONFIG_GCP_BUCKET);
 
-  char *post_url = malloc(256);
-  sprintf(post_url, "https://www.googleapis.com/upload/storage/v1/b/%s/o?uploadType=media&name=%s", CONFIG_GCP_BUCKET, pic_name);
-
-  char *authorization = malloc(256);
-  sprintf(authorization, "Bearer %s", ACCESS_TOKEN);
+  const char *URL = "https://www.googleapis.com/upload/storage/v1/b/%s/o?uploadType=media&name=%s";
+  char *post_url = malloc(strlen(URL) + strlen(CONFIG_GCP_BUCKET) + strlen(pic_name));
+  sprintf(post_url, URL, CONFIG_GCP_BUCKET, pic_name);
 
   esp_http_client_config_t config = {
       .url = post_url,
@@ -38,17 +35,16 @@ esp_err_t gcp_storage_insert_object(const char *pic_name, const char *binary, si
   esp_http_client_set_post_field(http_client, binary, binary_size);
 
   esp_http_client_set_header(http_client, "Content-Type", "image/jpg");
-  esp_http_client_set_header(http_client, "Authorization", authorization);
+  esp_http_client_set_header(http_client, "Authorization", ACCESS_TOKEN);
 
   esp_err_t err = esp_http_client_perform(http_client);
   if (err == ESP_OK)
   {
-    ESP_LOGW(TAG, "Status = %d", esp_http_client_get_status_code(http_client));
+    ESP_LOGI(TAG, "Status = %d", esp_http_client_get_status_code(http_client));
   }
   esp_http_client_cleanup(http_client);
 
   free(post_url);
-  free(authorization);
 
   return http_status;
 }

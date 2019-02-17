@@ -8,8 +8,6 @@
 
 #include "google_api.h"
 
-static const char *TAG = "gcp_auth_get_token";
-
 void gcp_auth_get_token()
 {
   ESP_LOGI(TAG, "Get auth token...");
@@ -26,7 +24,7 @@ void gcp_auth_get_token()
       .method = HTTP_METHOD_POST};
   esp_http_client_handle_t http_client = esp_http_client_init(&config);
   esp_http_client_set_post_field(http_client, post_data, strlen(post_data));
-  ESP_LOGI(TAG, "Len: %i, Body: \n\t%s", strlen(post_data), post_data);
+  ESP_LOGD(TAG, "Len: %i, Body:\n\t%s", strlen(post_data), post_data);
   esp_http_client_set_header(http_client, "Content-Type", "application/x-www-form-urlencoded");
 
   esp_err_t err = esp_http_client_perform(http_client);

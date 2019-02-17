@@ -11,7 +11,8 @@ The goal of this repository is to centralize information and examples for the ES
 
 To run the examples, make sure to have `xtensa` and `esp-idf` configured in your machine. If you haven't, refer to [this tutorial](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/index.html).
 
-- [Store pictures using Firebase (Google Storage) :new:](./examples/google_storage)
+- [Detect changes and take pictures :new:](./examples/change_detection)
+- [Store pictures using Firebase (Google Storage)](./examples/google_storage)
 - [Store pictures in SD](./examples/sd_jpg)
 - [JPG via Http server](./examples/http_jpg)
 

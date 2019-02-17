@@ -1,0 +1,76 @@
+menu "Example configuration"
+
+  menu "Camera configuration"
+
+    config XCLK_FREQ
+      int "XCLK Frequency"
+      default "20000000"
+      help
+          The XCLK Frequency in Herz.
+          
+    menu "Pin Configuration"
+      config D0
+        int "D0"
+        default "5"
+      config D1
+        int "D1"
+        default "18"
+      config D2
+        int "D2"
+        default "19"
+      config D3
+        int "D3"
+        default "21"
+      config D4
+        int "D4"
+        default "36"
+      config D5
+        int "D5"
+        default "39"
+      config D6
+        int "D6"
+        default "34"
+      config D7
+        int "D7"
+        default "35"
+      config XCLK
+        int "XCLK"
+        default "0"
+      config PCLK
+        int "PCLK"
+        default "22"
+      config VSYNC
+        int "VSYNC"
+        default "25"
+      config HREF
+        int "HREF"
+        default "23"
+      config SDA
+        int "SDA"
+        default "26"
+      config SCL
+        int "SCL"
+        default "27"
+      config RESET
+        int "RESET"
+        default "32"
+    endmenu
+
+  endmenu
+	
+  menu "Detection configuration"
+
+    config MAX_ACCEPTED_AVG_DIFF
+      int "Maximum accepted average difference"
+      default 7
+      help
+            For every QQVGA grayscale picture taken, an average is calculated. If absolute(new average - the previous average) > MAX_ACCEPTED_AVG_DIFF, it takes a full QXVGA Jpeg picture.
+
+    config PICTURE_QUEUE_SIZE
+      int "Picture queue size" 
+      default 7
+      help
+            Every time a new QXVGA picture is taken, send to the queue. This configuration represents the maximum size allowed to the queue.
+
+  endmenu
+endmenu

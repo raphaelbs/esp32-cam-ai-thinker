@@ -2,7 +2,7 @@
   "name": "aws-signature-4-calculator",
   "version": "1.0.0",
   "description": "A NodeJS that shows how to calculate AWS POST signature",
-  "main": "hmac-signature-example",
+  "main": "html-generator.js",
   "dependencies": {},
   "devDependencies": {},
   "keywords": [

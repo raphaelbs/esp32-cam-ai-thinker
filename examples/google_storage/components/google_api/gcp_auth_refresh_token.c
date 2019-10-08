@@ -34,12 +34,12 @@ esp_err_t gcp_auth_refresh_token()
 {
   ESP_LOGI(TAG, "Refresh auth token...");
 
-  char *post_data = malloc(256);
+  char *post_data = malloc(512);
   sprintf(post_data, "grant_type=refresh_token&client_id=%s&client_secret=%s&refresh_token=%s",
           CONFIG_GCP_CLIENT_ID,
           CONFIG_GCP_CLIENT_SECRET,
           CONFIG_GCP_REFRESH_TOKEN);
-
+          
   esp_http_client_config_t config = {
       .url = "https://www.googleapis.com/oauth2/v4/token",
       .event_handler = gcp_build_event_handle(http_handler_cb),

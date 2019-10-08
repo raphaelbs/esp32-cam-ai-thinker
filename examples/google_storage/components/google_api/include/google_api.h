@@ -18,7 +18,7 @@ void gcp_clean_access_token();
 
 typedef esp_err_t (*gcp_http_response_handler)(esp_err_t status, cJSON *json);
 
-http_event_handle_cb *gcp_build_event_handle(gcp_http_response_handler http_cb);
+http_event_handle_cb gcp_build_event_handle(gcp_http_response_handler http_cb);
 
 #ifndef CONFIG_GCP_DEVICE_CODE
 /**

@@ -23,10 +23,10 @@ esp_err_t gcp_check_bucket_access()
 {
   ESP_LOGI(TAG, "Checking bucket access [%s]...", CONFIG_GCP_BUCKET);
 
-  char *post_url = malloc(256);
+  char *post_url = malloc(512);
   sprintf(post_url, "https://www.googleapis.com/storage/v1/b?project=%s&maxResults=1&prefix=%s", CONFIG_GCP_PROJECT, CONFIG_GCP_BUCKET);
 
-  char *authorization = malloc(256);
+  char *authorization = malloc(512);
   sprintf(authorization, "Bearer %s", ACCESS_TOKEN);
 
   esp_http_client_config_t config = {

@@ -1,0 +1,11 @@
+{
+  "folders": [
+    {
+      "path": "examples\\sd_jpg"
+    },
+    {
+      "path": "examples\\change_detection"
+    }
+  ],
+  "settings": {}
+}

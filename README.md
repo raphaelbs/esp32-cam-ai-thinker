@@ -9,9 +9,11 @@ The goal of this repository is to centralize information and examples for the ES
 
 # Examples
 
-To run the examples, make sure to have `xtensa` and `esp-idf` configured in your machine. If you haven't, refer to [this tutorial](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/index.html).
+To run the examples, make sure to have `PlatformIO` installed. If you haven't, refer to [this tutorial](https://platformio.org/install/ide?install=vscode).
 
-- [Detect changes and take pictures :new:](./examples/change_detection)
+:new: Now all examples below runs on PlatformIO!
+
+- [Detect changes and take pictures](./examples/change_detection)
 - [Store pictures using Firebase (Google Storage)](./examples/google_storage)
 - [Store pictures in SD](./examples/sd_jpg)
 - [JPG via Http server](./examples/http_jpg)

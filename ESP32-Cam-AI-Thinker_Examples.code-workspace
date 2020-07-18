@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "examples\\sd_jpg"
+    },
+    {
+      "path": "examples\\change_detection"
+    },
+    {
+      "path": "examples\\google_storage"
+    },
+    {
+      "path": "examples\\http_jpg"
+    }
+  ],
+  "settings": {},
+  "extensions": {
+    "recommendations": [
+      "platformio.platformio-ide"
+    ]
+  }
+}

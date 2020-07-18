@@ -53,11 +53,57 @@ menu "Example configuration"
         default "27"
       config RESET
         int "RESET"
+        default "-1"
+      config PWDN
+        int "PWDN"
         default "32"
     endmenu
 
+    config OV2640_SUPPORT
+      bool "OV2640 Support"
+      default y
+      help
+        Enable this option if you want to use the OV2640.
+        Disable this option to save memory.
+
+    config OV7725_SUPPORT
+      bool "OV7725 Support"
+      default n
+      help
+        Enable this option if you want to use the OV7725.
+        Disable this option to save memory.
+      
+    config OV3660_SUPPORT
+      bool "OV3660 Support"
+      default n
+      help
+        Enable this option if you want to use the OV3360.
+        Disable this option to save memory.
+        
+    config OV5640_SUPPORT
+      bool "OV5640 Support"
+      default n
+      help
+        Enable this option if you want to use the OV5640.
+        Disable this option to save memory.
+
+    choice CAMERA_TASK_PINNED_TO_CORE
+      bool "Camera task pinned to core"
+      default CAMERA_CORE0
+      help
+        Pin the camera handle task to a certain core(0/1). It can also be done automatically choosing NO_AFFINITY.
+
+      config CAMERA_CORE0
+        bool "CORE0"
+      config CAMERA_CORE1
+        bool "CORE1"
+      config CAMERA_NO_AFFINITY
+        bool "NO_AFFINITY"
+
+    endchoice
+
   endmenu
-	
+
   menu "Detection configuration"
 
     config MAX_ACCEPTED_AVG_DIFF
@@ -73,4 +119,5 @@ menu "Example configuration"
             Every time a new QXVGA picture is taken, send to the queue. This configuration represents the maximum size allowed to the queue.
 
   endmenu
+
 endmenu

@@ -15,7 +15,7 @@ static const char *TAG = "example_change_detection";
 QueueHandle_t queue;
 
 static camera_config_t detection_config = {
-    .pin_pwdn = -1,
+    .pin_pwdn = CONFIG_PWDN,
     .pin_reset = CONFIG_RESET,
     .pin_xclk = CONFIG_XCLK,
     .pin_sscb_sda = CONFIG_SDA,
@@ -45,7 +45,7 @@ static camera_config_t detection_config = {
     .fb_count = 2       //if more than one, i2s runs in continuous mode. Use only with JPEG
 };
 static camera_config_t photo_config = {
-    .pin_pwdn = -1,
+    .pin_pwdn = CONFIG_PWDN,
     .pin_reset = CONFIG_RESET,
     .pin_xclk = CONFIG_XCLK,
     .pin_sscb_sda = CONFIG_SDA,

@@ -18,7 +18,7 @@
 static const char *TAG = "example:sd_jpg";
 
 static camera_config_t camera_config = {
-    .pin_pwdn = -1,
+    .pin_pwdn = CONFIG_PWDN,
     .pin_reset = CONFIG_RESET,
     .pin_xclk = CONFIG_XCLK,
     .pin_sscb_sda = CONFIG_SDA,
@@ -101,7 +101,7 @@ void app_main()
     FILE *file = fopen(pic_name, "w");
     if (file != NULL)
     {
-      size_t err = fwrite(pic->buf, 1, pic->len, file);
+      fwrite(pic->buf, 1, pic->len, file);
       ESP_LOGI(TAG, "File saved: %s", pic_name);
     }
     else

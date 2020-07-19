@@ -12,7 +12,7 @@
 static const char *TAG = "example:http_jpg";
 
 static camera_config_t camera_config = {
-    .pin_pwdn = -1,
+    .pin_pwdn = CONFIG_PWDN,
     .pin_reset = CONFIG_RESET,
     .pin_xclk = CONFIG_XCLK,
     .pin_sscb_sda = CONFIG_SDA,

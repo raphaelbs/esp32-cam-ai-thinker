@@ -20,13 +20,13 @@ This is step is a no-brainer.
 
 ### Step 1: Configure your Google Credential
 
-Register a new credential in [google cloud credential manager](https://console.cloud.google.com/apis/credentials). Make sure the right project is selected.
+Register a new `OAuth client ID` credential in [google cloud credential manager](https://console.cloud.google.com/apis/credentials). Make sure the right project is selected.
 
 ![new credential](../../assets/google_storage/new-credential.png)
 
-Make sure to select application type as `other`:
+Make sure to select application type as `TVs and Limited Input devices`:
 
-![application type as other](../../assets/google_storage/credential-type-other.png)
+![application type as TVs and Limited Input devices](../../assets/google_storage/credential-type-other.png)
 
 Save the newly generated `client ID` and `client secret`:
 
@@ -93,7 +93,7 @@ Run [the following HTTP request](https://developers.google.com/identity/protocol
 ```curl
 curl -X POST \
   https://www.googleapis.com/oauth2/v4/token \
-  -d 'client_secret=[client_secret]&client_id=[client_id]&code=[device_code]&grant_type=http%3A%2F%2Foauth.net%2Fgrant_type%2Fdevice%2F1.0'
+  -d 'client_secret=[client_secret]&client_id=[client_id]&device_code=[device_code]&grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code'
 ```
 
 You request should be someting like this:
@@ -101,7 +101,7 @@ You request should be someting like this:
 ```curl
 curl -X POST \
   https://www.googleapis.com/oauth2/v4/token \
-  -d 'client_secret=SbtStO7IgIcIJDrLEg7inTXD&client_id=188222768791-lb424a2dqca59bohh1uhitnbanl48usi.apps.googleusercontent.com&code=AH-1Ng2V5ESScqq8dz6Ena7n8-gYFKBAl2Y5QZfNemoEYFtOj_I-zNdNHpaEgjflkhT-qBWFCzyC_JfEsxKbfyh5WoPkMyDW1Q&grant_type=http%3A%2F%2Foauth.net%2Fgrant_type%2Fdevice%2F1.0'
+  -d 'client_secret=SbtStO7IgIcIJDrLEg7inTXD&client_id=188222768791-lb424a2dqca59bohh1uhitnbanl48usi.apps.googleusercontent.com&device_code=AH-1Ng2V5ESScqq8dz6Ena7n8-gYFKBAl2Y5QZfNemoEYFtOj_I-zNdNHpaEgjflkhT-qBWFCzyC_JfEsxKbfyh5WoPkMyDW1Q&grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code'
 ```
 
 _Note that all characters were [URI encoded](https://www.urlencoder.org/)._
@@ -123,7 +123,9 @@ You will receive both `access_token` and `refresh_token`:
 
 Besides setting your WiFi SSID and Password via `make menuconfig` or directly in [Kconfig.projbuild](./main/Kconfig.projbuild), you also need to set `GCP_CLIENT_ID`, `GCP_CLIENT_SECRET`, `GCP_REFRESH_TOKEN`, `GCP_DEVICE_CODE`, `GCP_BUCKET` and `GCP_PROJECT`.
 
-**This example does NOT url encode any parameter. You need to do it previously. I.e. replace '1/' in refresh token for '1%2F'.**
+The bucket name can be found on [Google Cloud's Storage page](https://console.cloud.google.com/storage/browser).
+
+**This example does NOT url encode any parameter. You need to do it before adding they to Kconfig. I.e. replace '1/' in refresh token for '1%2F'.**
 
 ## Notes
 

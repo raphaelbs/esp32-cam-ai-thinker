@@ -12,8 +12,11 @@ void gcp_auth_get_token()
 {
   ESP_LOGI(TAG, "Get auth token...");
 
-  char *post_data = malloc(512);
-  sprintf(post_data, "grant_type=http://oauth.net/grant_type/device/1.0&client_id=%s&client_secret=%s&code=%s",
+  char *BODY = "grant_type=urn:ietf:params:oauth:grant-type:device_code&client_id=%s&client_secret=%s&code=%s";
+  int body_len = strlen(BODY) + strlen(CONFIG_GCP_CLIENT_ID) + strlen(CONFIG_GCP_CLIENT_SECRET) + strlen(CONFIG_GCP_DEVICE_CODE) + 1;
+  char *post_data = malloc(body_len);
+  snprintf(post_data, body_len,
+          BODY,
           CONFIG_GCP_CLIENT_ID,
           CONFIG_GCP_CLIENT_SECRET,
           CONFIG_GCP_DEVICE_CODE);

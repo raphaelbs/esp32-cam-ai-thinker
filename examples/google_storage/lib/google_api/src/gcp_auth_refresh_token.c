@@ -34,8 +34,11 @@ esp_err_t gcp_auth_refresh_token()
 {
   ESP_LOGI(TAG, "Refresh auth token...");
 
-  char *post_data = malloc(256);
-  sprintf(post_data, "grant_type=refresh_token&client_id=%s&client_secret=%s&refresh_token=%s",
+  char *BODY = "grant_type=refresh_token&client_id=%s&client_secret=%s&refresh_token=%s";
+  int body_len = strlen(BODY) + strlen(CONFIG_GCP_CLIENT_ID) + strlen(CONFIG_GCP_CLIENT_SECRET) + strlen(CONFIG_GCP_REFRESH_TOKEN) + 1;
+  char *post_data = malloc(body_len);
+  snprintf(post_data, body_len,
+          BODY,
           CONFIG_GCP_CLIENT_ID,
           CONFIG_GCP_CLIENT_SECRET,
           CONFIG_GCP_REFRESH_TOKEN);

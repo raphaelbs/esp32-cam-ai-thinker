@@ -24,8 +24,9 @@ esp_err_t gcp_storage_insert_object(const char *pic_name, const char *binary, si
   ESP_LOGI(TAG, "Insert object [%s] in bucket [%s]...", pic_name, CONFIG_GCP_BUCKET);
 
   const char *URL = "https://www.googleapis.com/upload/storage/v1/b/%s/o?uploadType=media&name=%s";
-  char *post_url = malloc(strlen(URL) + strlen(CONFIG_GCP_BUCKET) + strlen(pic_name));
-  sprintf(post_url, URL, CONFIG_GCP_BUCKET, pic_name);
+  int post_url_len = strlen(URL) + strlen(CONFIG_GCP_BUCKET) + strlen(pic_name) + 1;
+  char *post_url = malloc(post_url_len);
+  snprintf(post_url, post_url_len, URL, CONFIG_GCP_BUCKET, pic_name);
 
   esp_http_client_config_t config = {
       .url = post_url,

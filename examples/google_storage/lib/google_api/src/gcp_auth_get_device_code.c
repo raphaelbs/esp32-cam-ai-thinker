@@ -12,8 +12,10 @@ void gcp_auth_get_device_code()
 {
   ESP_LOGI(TAG, "Get device token...");
 
-  char *post_data = malloc(143);
-  sprintf(post_data, "scope=https://www.googleapis.com/auth/devstorage.read_write&client_id=%s", CONFIG_GCP_CLIENT_ID);
+  char *BODY = "scope=https://www.googleapis.com/auth/devstorage.read_write&client_id=%s";
+  int body_len = strlen(BODY) + strlen(CONFIG_GCP_CLIENT_ID) + 1;
+  char *post_data = malloc(body_len);
+  snprintf(post_data, body_len, BODY, CONFIG_GCP_CLIENT_ID);
 
   esp_http_client_config_t config = {
       .url = "https://accounts.google.com/o/oauth2/device/code",

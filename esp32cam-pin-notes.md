@@ -40,8 +40,11 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   * Signal: EMAC_TX_ER - Ethernet MAC MII/RII interface
   * listed in ESP32_S datasheet as "RTC_Function2" I2C_SCL
   * designated as a (wpd) "weak pull down" by ESP32_S datasheet v3.4 pg53 IO/Mux Addendum
-  * 1-bit SD Card 'hack' initialize the microSD card as follows, you won’t have this problem because the microSD card won’t use the GPIO4, GPIO12, GPIO13 data lines (HS_DATA1, HS_DATA2, HS_DATA3 respectively)
+  * 1-bit SD Card 'hack' initialize the microSD card as follows, then the microSD card won’t use the GPIO4, GPIO12, GPIO13 data lines (HS_DATA1, HS_DATA2, HS_DATA3 respectively)!  
     ```
+    // enable SD_MMC in menuconfig > Arduino section
+    #include "SD_MMC.h"
+    ...
     SD_MMC.begin("/sdcard", true)
     ```
     https://randomnerdtutorials.com/esp32-cam-ai-thinker-pinout/ 

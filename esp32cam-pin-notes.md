@@ -16,7 +16,8 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   * Signal: EMAC_TX_CLK - Ethernet MAC MII/RII interface
   * listed in ESP32_S datasheet as "RTC_Function2" I2C_SDA
   * designated as a (wpu) "weak pull up" by ESP32_S datasheet v3.4 pg53 IO/Mux Addendum
-* GPIO1 - U0RXD used for serial output
+* GPIO1 - U0TXD used for serial output
+  * designated as OUTPUT ONLY
 * GPIO2 - HS2_DATA0 (IO2) 
   * Used by SD-Card
   * might be usable as a SPI MISO (need to verify)
@@ -26,8 +27,9 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   * ADC2_CH2- 12bit SAR ADC, SD Memory card v3.01 
   * Signal: HSPIWP - Parallel QSPI
   * designated as a (wpd) "weak pull down" by ESP32_S datasheet v3.4 pg53 IO/Mux Addendum
-* GPIO3 - U0TXD used for serial input
+* GPIO3 - U0RXD used for serial input
   * Signal: EMAC_RXD2 - Ethernet MAC MII/RII interface
+  * designated as I1? (input only?) 
 * GPIO4 - HS_DATA1 
   * Used by SD Card
   * has a 47Kohm resistor (R11) on the SD1/MicroSD line

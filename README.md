@@ -37,6 +37,10 @@ Also it is very important to **use a external power supply**. USBs usually do no
 > ![schematics to wire the board](./assets/Wiring-with-usb-ttl.png)<br />
 > Diagram to wire the board
 
+## Pin Notes
+What can/can't pins be used for? read: 
+[Pin Notes](./pin_notes.md)
+
 ## Instructions
 
 When flashing:

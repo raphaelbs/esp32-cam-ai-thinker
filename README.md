@@ -39,7 +39,7 @@ Also it is very important to **use a external power supply**. USBs usually do no
 
 ## Pin Notes
 What can/can't pins be used for? read: 
-[Pin Notes](./pin_notes.md)
+[Pin Notes](./esp32cam-pin-notes.md)
 
 ## Instructions
 

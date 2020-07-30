@@ -40,6 +40,11 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   * Signal: EMAC_TX_ER - Ethernet MAC MII/RII interface
   * listed in ESP32_S datasheet as "RTC_Function2" I2C_SCL
   * designated as a (wpd) "weak pull down" by ESP32_S datasheet v3.4 pg53 IO/Mux Addendum
+  * 1-bit SD Card 'hack' initialize the microSD card as follows, you won’t have this problem because the microSD card won’t use the GPIO4, GPIO12, GPIO13 data lines (HS_DATA1, HS_DATA2, HS_DATA3 respectively)
+    ```
+    SD_MMC.begin("/sdcard", true)
+    ```
+    https://randomnerdtutorials.com/esp32-cam-ai-thinker-pinout/ 
 * GPIO5 - (not exposed) CSI_D0 esp_camera.h:CAM_PIN_D0 -> Camera FPC Y2
   * strapping pin - [https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf](ESP32_S datasheet)
   ** default:pull-up w/GPIO5 controls Timing of SDIO slave (see documentation) 
@@ -57,6 +62,7 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   * SPICS0 - Parallel QSPI
 * GPIO12 - HS2_DATA2 
   * ESP32_S datasheet reference: MTDI
+  * Hint: use the SD-Card 1bit mode trick described on GPIO4 to use this pin!
   * used as strapping pin - [https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf](ESP32_S datasheet)
     ** default:pull-down selects voltage (3.3v:0, 1.8v:1)    
   * Supports Capactive Sensing T5 (see ESP32_S datasheet section 4.1.5 "Touch Sensor")
@@ -70,6 +76,7 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   * Reference & Instructions: [https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sd\_pullup\_requirements.html#compatibility-overview-espressif-hw-sdio](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sd_pullup_requirements.html#compatibility-overview-espressif-hw-sdio)
 * GPIO13 - HS2_DATA3
   * ESP32_S datasheet: MTCK
+  * Hint: use the SD-Card 1bit mode trick described on GPIO4 to use this pin!
   * Supports Capactive Sensing T4 (see ESP32_S datasheet section 4.1.5 "Touch Sensor")
   * JTAG, ADC2_CH4- 12bit SAR ADC, SD Memory card v3.01
   * Signal HSPID - Parallel QSPI
@@ -94,6 +101,8 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   * designated as a (wpu) "weak pull up" by ESP32_S datasheet v3.4 pg53 IO/Mux Addendum
 * GPIO16 - U2RXD "useless gpio" 
   * is not RTC (can't be used for pwm or precision measurement) 
+  * Note that GPIO 16 is not an ADC pin, so you can’t read analog sensors on this pin.
+  * Additionally, GPIO 16 is not an RTC GPIO, so it can’t be used as an external wake-up source. 
   * has a 10Kohm pull-up resistor
   * is connected to CS# pin1 of onboard PSRAM64 (64Mbit/8mb CMOS SRAM) that is required for *most* high resolution camera applications
   * Signal: EMAC_CLK_OUT - Ethernet MAC MII/RII interface

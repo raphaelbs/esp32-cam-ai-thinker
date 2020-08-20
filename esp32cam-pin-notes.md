@@ -8,7 +8,8 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   * Pull to ground (at reset) to put board into flash mode
   * Internally has a 3.3v 10k pullup resistor (R19)
   * CSI_MCLK is used by Camera (line 12 on FPC) 
-  * strapping pin - [https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf](ESP32_S datasheet)
+  * strapping pin - [ESP32_S datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
+  
   ** default:pull-up spi-boot:1, download-boot:0
   * Supports Capactive Sensing T1 (see ESP32_S datasheet section 4.1.5 "Touch Sensor")
   * ADC2_CH1- 12bit SAR ADC
@@ -21,7 +22,8 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 * GPIO2 - HS2_DATA0 (IO2) 
   * Used by SD-Card
   * might be usable as a SPI MISO (need to verify)
-  * strapping pin - [https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf](ESP32_S datasheet)
+  * strapping pin - [ESP32_S datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
+
   ** default:pull-down -- must be down to download boot on GPIO0)
   * Supports Capactive Sensing T2 (see ESP32_S datasheet section 4.1.5 "Touch Sensor")
   * ADC2_CH2- 12bit SAR ADC, SD Memory card v3.01 
@@ -49,7 +51,8 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
     ```
     https://randomnerdtutorials.com/esp32-cam-ai-thinker-pinout/ 
 * GPIO5 - (not exposed) CSI_D0 esp_camera.h:CAM_PIN_D0 -> Camera FPC Y2
-  * strapping pin - [https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf](ESP32_S datasheet)
+  * strapping pin - [ESP32_S datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
+
   ** default:pull-up w/GPIO5 controls Timing of SDIO slave (see documentation) 
   * Signal: VSPICS0 - Parallel QSPI
   * Signal: EMAC_RX_CLK - Ethernet MAC MII/RII interface
@@ -66,7 +69,8 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 * GPIO12 - HS2_DATA2 
   * ESP32_S datasheet reference: MTDI
   * Hint: use the SD-Card 1bit mode trick described on GPIO4 to use this pin!
-  * used as strapping pin - [https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf](ESP32_S datasheet)
+  * used as strapping pin - [ESP32_S datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
+
     ** default:pull-down selects voltage (3.3v:0, 1.8v:1)    
   * Supports Capactive Sensing T5 (see ESP32_S datasheet section 4.1.5 "Touch Sensor")
   * JTAG, ADC2_CH5- 12bit SAR ADC
@@ -76,7 +80,8 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   * MTDI (GPIO12) is used as a bootstrapping pin to select the output voltage of an internal regulator (VDD_SDIO) which powers the flash chip.
   * when connected as SDA (for I2C) causes "RTCWDT_RTC_REST"exception ets_main.c 371 at boot due to flash voltage not being set properly. 
   * To resolve: it is (Recommended) by EspressIf to Burn the flash voltage selection eFuses. This will permanently configure the internal regulator’s output voltage to 3.3 V, and GPIO12 will not be used as a bootstrapping pin. After that, connect a pull-up resistor to GPIO12.
-  * Reference & Instructions: [https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sd\_pullup\_requirements.html#compatibility-overview-espressif-hw-sdio](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sd_pullup_requirements.html#compatibility-overview-espressif-hw-sdio)
+  * Reference & Instructions: [overview of compatibility](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sd_pullup_requirements.html#compatibility-overview-espressif-hw-sdio)
+
 * GPIO13 - HS2_DATA3
   * ESP32_S datasheet: MTCK
   * Hint: use the SD-Card 1bit mode trick described on GPIO4 to use this pin!
@@ -95,7 +100,8 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 * GPIO15 - HS2_CMD
   * ESP32_S datasheet: MTDO
   * might be usable as an SPI CS/CMD (need to verify)
-  * strapping pin - [https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf](ESP32_S datasheet)
+  * strapping pin - [ESP32_S datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
+
   ** default:pull-up enable/disable debugging log print over U0TXD during boot (active:1, silent:0)
   * Supports Capactive Sensing T3 (see ESP32_S datasheet section 4.1.5 "Touch Sensor")
   * JTAG, ADC2_CH3- 12bit SAR ADC
@@ -191,7 +197,8 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   * also RTC_GPIO3
 
 ### GPIO General Purpose
-According to the ESP32_S docs "Any GPIO Pins" can be used to for:
+According to the ESP32_S docs "Any GPIO Pins" can be used to:
+
 * Motor PWM 
   * Three channels of 16bit timers generate PWM waveforms, three fault detection signals, three event capture signals, three sync signals
 * Two UART Devices with hardware flow control & DMA

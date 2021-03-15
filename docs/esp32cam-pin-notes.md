@@ -3,7 +3,53 @@
 You'll discover most of the pins on the ESP32 cam are already used or have wonky behaviors.  
 To make matters a bit more confusing the layout seems to be done by a inebriated engineer or (more likely) a trace auto-router. 
 Some of those poor decisions (e.g. not exposing the I2C pins) significantly cripple the possible applications. 
-However pins listed as "not exposed" could be accessible using a soldering iron, or a custom FPC in the camera interface. 
+However pins listed as "not exposed" could be accessible using a soldering iron, or a custom FPC in the camera interface.
+
+## Table of contents
+
+- [Pin Notes](#pin-notes)
+  - [Table of contents](#table-of-contents)
+  - [GPIO0 - CAM_PIN_XCLK or CSI_MCLK](#gpio0---cam_pin_xclk-or-csi_mclk)
+  - [GPIO1 - U0TXD](#gpio1---u0txd)
+  - [GPIO2 - HS2_DATA0 (IO2) MISO](#gpio2---hs2_data0-io2-miso)
+  - [GPIO3 - U0RXD](#gpio3---u0rxd)
+  - [GPIO4 - HS_DATA1](#gpio4---hs_data1)
+  - [GPIO5 - (not exposed)](#gpio5---not-exposed)
+  - [GPIO6 - (not exposed)](#gpio6---not-exposed)
+  - [GPIO7 - (not exposed)](#gpio7---not-exposed)
+  - [GPIO8 - (not exposed)](#gpio8---not-exposed)
+  - [GPIO9 - (not exposed)](#gpio9---not-exposed)
+  - [GPIO10 - (not exposed)](#gpio10---not-exposed)
+  - [GPIO11 - (not exposed)](#gpio11---not-exposed)
+  - [GPIO12 - HS2_DATA2](#gpio12---hs2_data2)
+  - [GPIO13 - HS2_DATA3](#gpio13---hs2_data3)
+  - [GPIO14 - HS2_CLK SCK](#gpio14---hs2_clk-sck)
+  - [GPIO15 - HS2_CMD](#gpio15---hs2_cmd)
+  - [GPIO16 - U2RXD "useless gpio"](#gpio16---u2rxd-useless-gpio)
+  - [GPIO17 - (not exposed) PSRAM_CLK](#gpio17---not-exposed-psram_clk)
+  - [GPIO18 - (not exposed)](#gpio18---not-exposed)
+  - [GPIO19 - (not exposed)](#gpio19---not-exposed)
+  - [GPIO20 - ??](#gpio20---)
+  - [GPIO21 - (not exposed)](#gpio21---not-exposed)
+  - [GPIO22 - (not exposed)](#gpio22---not-exposed)
+  - [GPIO23 - (not exposed)](#gpio23---not-exposed)
+  - [GPIO24 - (not exposed) - ??](#gpio24---not-exposed---)
+  - [GPIO25 - (not exposed)](#gpio25---not-exposed)
+  - [GPIO26 - (not exposed)](#gpio26---not-exposed)
+  - [GPIO27 - (not exposed)](#gpio27---not-exposed)
+  - [GPIO28 - (not exposed)](#gpio28---not-exposed)
+  - [GPIO29 - (not exposed)](#gpio29---not-exposed)
+  - [GPIO30 - (not exposed)](#gpio30---not-exposed)
+  - [GPIO31 - (not exposed)](#gpio31---not-exposed)
+  - [GPIO32 - (not exposed)](#gpio32---not-exposed)
+  - [GPIO33 - (sort of exposed) pcb LED](#gpio33---sort-of-exposed-pcb-led)
+  - [GPIO34 - (not exposed)](#gpio34---not-exposed)
+  - [GPIO35 - (not exposed)](#gpio35---not-exposed)
+  - [GPIO36 - (not exposed)](#gpio36---not-exposed)
+  - [GPIO37 - (not exposed)](#gpio37---not-exposed)
+  - [GPIO38 - (not exposed)](#gpio38---not-exposed)
+  - [GPIO39 - (not exposed)](#gpio39---not-exposed)
+  - [GPIO General Purpose](#gpio-general-purpose)
 
 ## GPIO0 - CAM_PIN_XCLK or CSI_MCLK 
 * Pull to ground (at reset) to put board into flash mode
@@ -21,9 +67,9 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 * used for serial output
 * designated as OUTPUT ONLY
 
-## GPIO2 - HS2_DATA0 (IO2) 
+## GPIO2 - HS2_DATA0 (IO2) MISO
 * Used by SD-Card
-* might be usable as a SPI MISO (need to verify)
+* Usable as a SPI MISO ([reference](https://github.com/raphaelbs/esp32-cam-ai-thinker/issues/55))
 * strapping pin - [ESP32_S datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf), default:pull-down -- must be down to download boot on GPIO0)
 * Supports Capactive Sensing T2 (see ESP32_S datasheet section 4.1.5 "Touch Sensor")
 * ADC2_CH2- 12bit SAR ADC, SD Memory card v3.01 
@@ -104,9 +150,9 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 * Signal HSPID - Parallel QSPI
 * Signal: EMAC_RX_ER - Ethernet MAC MII/RII interface
 
-## GPIO14 - HS2_CLK
+## GPIO14 - HS2_CLK SCK
 * ESP32_S datasheet: MTMS 
-* might be usable as an SPI CLK (need to verify)
+* Usable as an SPI CLK ([reference](https://github.com/raphaelbs/esp32-cam-ai-thinker/issues/55))
 * Supports Capactive Sensing T6 (see ESP32_S datasheet section 4.1.5 "Touch Sensor")
 * JTAG, ADC6_CH0- 12bit SAR ADC, SD memory card v3.01
 * Signal: HSPICLK - Parallel QSPI

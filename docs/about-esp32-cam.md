@@ -27,6 +27,14 @@ This document refers to the board itself and its hardware features.
 
 </details>
 
+<details>
+
+<summary>Red Led</summary>
+
+![PCB led](../assets/esp32-cam-red-led.jpg)
+
+</details>
+
 # ESP32s
 
 <details>
@@ -44,5 +52,20 @@ This document refers to the board itself and its hardware features.
 <summary>board dimensions</summary>
 
 ![board dimensions](../assets/esp32-cam-dimensions.jpg)
+
+</details>
+
+# Schematic
+
+<details>
+
+<summary>schematic diagram </summary>
+
+![schematic diagram](../assets/esp32-cam-schematic-diagram.jpg)
+
+[incschematic diagram](../assets/ESP32-CAM-schema-V1.6.pdf)
+
+[source](https://github.com/SeeedDocument/forum_doc/blob/master/reg/ESP32_CAM_V1.6.pdf)
+
 
 </details>

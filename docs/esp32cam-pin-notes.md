@@ -9,11 +9,15 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 
 - [Pin Notes](#pin-notes)
   - [Table of contents](#table-of-contents)
-  - [GPIO0 - CAM_PIN_XCLK or CSI_MCLK](#gpio0---cam_pin_xclk-or-csi_mclk)
+  - [Assignment](#assignment)
+    - [Power Pins](#power-pins)
+    - [Power output pin](#power-output-pin)
+    - [sources](#sources)
+  - [GPIO0 - CAM\_PIN\_XCLK or CSI\_MCLK](#gpio0---cam_pin_xclk-or-csi_mclk)
   - [GPIO1 - U0TXD](#gpio1---u0txd)
-  - [GPIO2 - HS2_DATA0 (IO2) MISO](#gpio2---hs2_data0-io2-miso)
+  - [GPIO2 - HS2\_DATA0 (IO2) MISO](#gpio2---hs2_data0-io2-miso)
   - [GPIO3 - U0RXD](#gpio3---u0rxd)
-  - [GPIO4 - HS_DATA1](#gpio4---hs_data1)
+  - [GPIO4 - HS\_DATA1](#gpio4---hs_data1)
   - [GPIO5 - (not exposed)](#gpio5---not-exposed)
   - [GPIO6 - (not exposed)](#gpio6---not-exposed)
   - [GPIO7 - (not exposed)](#gpio7---not-exposed)
@@ -21,12 +25,12 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   - [GPIO9 - (not exposed)](#gpio9---not-exposed)
   - [GPIO10 - (not exposed)](#gpio10---not-exposed)
   - [GPIO11 - (not exposed)](#gpio11---not-exposed)
-  - [GPIO12 - HS2_DATA2](#gpio12---hs2_data2)
-  - [GPIO13 - HS2_DATA3](#gpio13---hs2_data3)
-  - [GPIO14 - HS2_CLK SCK](#gpio14---hs2_clk-sck)
-  - [GPIO15 - HS2_CMD](#gpio15---hs2_cmd)
+  - [GPIO12 - HS2\_DATA2](#gpio12---hs2_data2)
+  - [GPIO13 - HS2\_DATA3](#gpio13---hs2_data3)
+  - [GPIO14 - HS2\_CLK SCK](#gpio14---hs2_clk-sck)
+  - [GPIO15 - HS2\_CMD](#gpio15---hs2_cmd)
   - [GPIO16 - U2RXD "useless gpio"](#gpio16---u2rxd-useless-gpio)
-  - [GPIO17 - (not exposed) PSRAM_CLK](#gpio17---not-exposed-psram_clk)
+  - [GPIO17 - (not exposed) PSRAM\_CLK](#gpio17---not-exposed-psram_clk)
   - [GPIO18 - (not exposed)](#gpio18---not-exposed)
   - [GPIO19 - (not exposed)](#gpio19---not-exposed)
   - [GPIO20 - ??](#gpio20---)
@@ -50,6 +54,29 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   - [GPIO38 - (not exposed)](#gpio38---not-exposed)
   - [GPIO39 - (not exposed)](#gpio39---not-exposed)
   - [GPIO General Purpose](#gpio-general-purpose)
+
+
+## Assignment
+
+### Power Pins
+
+The ESP32-CAM comes with three `GND` pins (colored in black color) and two power pins (colored with red color): `3.3V` and `5V`.
+
+You can power the ESP32-CAM through the `3.3V` or `5V` pins. However, many people reported errors when powering the ESP32-CAM with 3.3V, so we always advise to power the ESP32-CAM through the 5V pin.
+
+### Power output pin
+There’s also the pin labeled on the silkscreen as `VCC` (colored with a yellow rectangle). You should not use that pin to power the ESP32-CAM. That is an output power pin. It can either output `5V` or `3.3V`.
+
+In our case, the ESP32-CAM outputs 3.3V whether it is powered with 5V or 3.3V. Next to the VCC pin, there are two pads. One labeled as 3.3V and other as 5V. The 5V power can be made available on the VCC, by unsoldering the 3.3 V pad and making a jumper connection with the 5V pad.
+
+
+
+### sources
+[Linux Hint](https://linuxhint.com/esp32-cam-pinout/), 
+[Random Nerd](https://randomnerdtutorials.com/esp32-cam-ai-thinker-pinout),
+as well as Abish Vijayan [Github](https://github.com/abish7643/ESP32Cam-I2CSensors) and his 
+[blog](https://3iinc.xyz/blog/how-to-use-i2c-sensor-bme280-with-esp32cam/)
+
 
 ## GPIO0 - CAM_PIN_XCLK or CSI_MCLK 
 * Pull to ground (at reset) to put board into flash mode
@@ -258,7 +285,8 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 * If this is on, the WIFI won't work. 
 * ADC1_CH5
 * also RTC_GPIO8
-
+* That LED works with inverted logic, so you send a `LOW` signal to turn it on and a `HIGH` signal to turn it off.
+* 
 ## GPIO34 - (not exposed)
 * esp_camera.h:CAM_PIN_D6 -> Camera FPC Y8
 * Analog pin name: VDET_1

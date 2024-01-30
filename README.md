@@ -4,7 +4,7 @@
 
 The goal of this repository is to centralize information and examples for the ESP32-CAM A.I. Thinker.
 
-[Read the board and periferals specifications here.](./docs/about-esp32-cam.md)
+[Read the board and peripherals specifications here.](./docs/about-esp32-cam.md)
 
 > <img src="https://www.open-electronics.org/wp-content/uploads/2018/10/ESP32-CAM.jpg" width="auto" height="200" alt="ESP32-CAM - A.I. Thinker" /><br/>
 > ESP32-CAM A.I. Thinker usually sells with OV2640 sensor

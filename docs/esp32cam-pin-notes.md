@@ -9,11 +9,23 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 
 - [Pin Notes](#pin-notes)
   - [Table of contents](#table-of-contents)
-  - [GPIO0 - CAM_PIN_XCLK or CSI_MCLK](#gpio0---cam_pin_xclk-or-csi_mclk)
+  - [GPIO General Purpose](#gpio-general-purpose)
+  - [Assignment](#assignment)
+    - [Power Pins](#power-pins)
+    - [Power output pin](#power-output-pin)
+    - [UART / Serial Pins](#uart--serial-pins)
+    - [Micro SD card pins](#micro-sd-card-pins)
+    - [ADC pins](#adc-pins)
+    - [RTC GPIO Pins (Interrupt)](#rtc-gpio-pins-interrupt)
+    - [SPI pins](#spi-pins)
+    - [Touch Pins](#touch-pins)
+    - [PWM pins](#pwm-pins)
+    - [sources](#sources)
+  - [GPIO0 - CAM\_PIN\_XCLK or CSI\_MCLK](#gpio0---cam_pin_xclk-or-csi_mclk)
   - [GPIO1 - U0TXD](#gpio1---u0txd)
-  - [GPIO2 - HS2_DATA0 (IO2) MISO](#gpio2---hs2_data0-io2-miso)
+  - [GPIO2 - HS2\_DATA0 (IO2) MISO](#gpio2---hs2_data0-io2-miso)
   - [GPIO3 - U0RXD](#gpio3---u0rxd)
-  - [GPIO4 - HS_DATA1](#gpio4---hs_data1)
+  - [GPIO4 - HS\_DATA1  - Flashlight](#gpio4---hs_data1----flashlight)
   - [GPIO5 - (not exposed)](#gpio5---not-exposed)
   - [GPIO6 - (not exposed)](#gpio6---not-exposed)
   - [GPIO7 - (not exposed)](#gpio7---not-exposed)
@@ -21,12 +33,12 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   - [GPIO9 - (not exposed)](#gpio9---not-exposed)
   - [GPIO10 - (not exposed)](#gpio10---not-exposed)
   - [GPIO11 - (not exposed)](#gpio11---not-exposed)
-  - [GPIO12 - HS2_DATA2](#gpio12---hs2_data2)
-  - [GPIO13 - HS2_DATA3](#gpio13---hs2_data3)
-  - [GPIO14 - HS2_CLK SCK](#gpio14---hs2_clk-sck)
-  - [GPIO15 - HS2_CMD](#gpio15---hs2_cmd)
+  - [GPIO12 - HS2\_DATA2](#gpio12---hs2_data2)
+  - [GPIO13 - HS2\_DATA3](#gpio13---hs2_data3)
+  - [GPIO14 - HS2\_CLK SCK](#gpio14---hs2_clk-sck)
+  - [GPIO15 - HS2\_CMD](#gpio15---hs2_cmd)
   - [GPIO16 - U2RXD "useless gpio"](#gpio16---u2rxd-useless-gpio)
-  - [GPIO17 - (not exposed) PSRAM_CLK](#gpio17---not-exposed-psram_clk)
+  - [GPIO17 - (not exposed) PSRAM\_CLK](#gpio17---not-exposed-psram_clk)
   - [GPIO18 - (not exposed)](#gpio18---not-exposed)
   - [GPIO19 - (not exposed)](#gpio19---not-exposed)
   - [GPIO20 - ??](#gpio20---)
@@ -49,9 +61,127 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
   - [GPIO37 - (not exposed)](#gpio37---not-exposed)
   - [GPIO38 - (not exposed)](#gpio38---not-exposed)
   - [GPIO39 - (not exposed)](#gpio39---not-exposed)
-  - [GPIO General Purpose](#gpio-general-purpose)
+
+
+
+## GPIO General Purpose
+Out of 32 total GPIO pins, there are only 10 GPIO pins available for ESP-32 CAM, as the rest of the pins are internally used for PSRAM and camera. By programming the proper registers these pins can be assigned with multiple peripheral duties such as touch, SPI, UART, and ADC.
+
+According to the ESP32_S docs "Any GPIO Pins" can be used to:
+
+* Motor PWM 
+* Three channels of 16bit timers generate PWM waveforms, three fault detection signals, three event capture signals, three sync signals
+* Two UART Devices with hardware flow control & DMA
+* I2C
+* devices in slave or master mode
+* I2S
+* Stereo input/output, Parallel LCD data output, Parallel Camera Data input
+* Infrared Remote Controller
+* Eight channels for an IR transmitter & receiver of various waveforms
+* General Purpose SPI
+* LED PWM (16 independent channels @80mhz with duty accuracy of 16bits), 
+* Pulse Counter (pcnt_sig_ch[0-1]_in[0-7])
+* Signals: EMAC_MDC_out, EMAC_MDI_in, EMAC_MDO_out, EMAC_CRS_out, EMAC_COL_out - Ethernet MAC MII/RII interface
+
+
+## Assignment
+
+### Power Pins
+
+The ESP32-CAM comes with three `GND` pins (colored in black color) and two power pins (colored with red color): `3.3V` and `5V`.
+
+You can power the ESP32-CAM through the `3.3V` or `5V` pins. However, many people reported errors when powering the ESP32-CAM with 3.3V, so we always advise to power the ESP32-CAM through the 5V pin.
+
+### Power output pin
+There’s also the pin labeled on the silkscreen as `VCC` (colored with a yellow rectangle). You should not use that pin to power the ESP32-CAM. That is an output power pin. It can either output `5V` or `3.3V`.
+
+In our case, the ESP32-CAM outputs 3.3V whether it is powered with 5V or 3.3V. Next to the VCC pin, there are two pads. One labeled as 3.3V and other as 5V. The 5V power can be made available on the VCC, by unsoldering the 3.3 V pad and making a jumper connection with the 5V pad.
+
+### UART / Serial Pins
+There are two interfaces of UART, UART0 AND UART2 on the ESP-32 S chip. The **GPIO 1** (Tx), **GPIO 3** (Rx), and **GPIO 16** (Rx 2) are three serial pins. Serial pins are responsible for communication. The only pin of UART2 (GPIO 16) is broken out, so it doesn’t take part in communication and makes UART0 the only usable UART on the chip. ESP32 doesn’t have a built-in programmer, so the GPIO 1 pin is used to transmit and GPIO 3 is used to receive the data. These pins make communication connections and upload code to the board.
+
+### Micro SD card pins
+All the microSD card pins are multipurpose, when the SD card is not in use, then these pins can be used as normal input/output pins.
+
+If you’re not using the microSD card, you can use these pins as regular inputs/outputs. You can take a look at the [ESP32 pinout guide](https://randomnerdtutorials.com/esp32-pinout-reference-gpios/) to see the features of these pins.
+
+All these GPIOs are RTC and support ADC: GPIOs 2, 4, 12, 13, 14, and 15.
+
+<details>
+
+<summary>pins</summary>
+
+![uSD](../assets/esp32-cam-usd.webp)
+
+</details>
+
+### ADC pins
+ADC (Analog to Digital converter) pins are capable of changing analog signal to digital signal. The ADC converts voltage into a bit which is understandable by the microprocessor. The ADC input channel has a 12-bit resolution, which means the readings can range from 0 to 4095, in which 0 will respond to 0V and 4095 will respond to 3.3V. ADC2 pins are internally used by the Wi-Fi driver, so they cannot be used when Wi-Fi is on. When Wi-Fi is on, there is trouble getting output from the ADC2 GPIO.
+
+<details>
+
+<summary>pins</summary>
+
+![ADC](../assets/esp32-cam-adc.webp)
+
+</details>
+
+### RTC GPIO Pins (Interrupt)
+An external interrupt means an external interference in the normal functioning of the system. This interrupt can come from the user or any other device present among the networks. A common use of interrupts in ESP32-CAM is to wake up the microcontroller to perform a task. In ESP32-CAM, GPIO pins which are highlighted below can be configured as interrupts. These RTC GPIO pins are routed to the low-power subsystem; when an ultra-power coprocessor is running, these pins wake the ESP32 from sleep.
+
+<details>
+
+<summary>pins</summary>
+
+![RTC](../assets/esp32-cam-rtc.webp)
+
+</details>
+
+### SPI pins
+Serial Peripheral Interrupt (SPI) is a protocol for data communication that is used by a microcontroller to communicate with another or more than one external device and makes a bus-like connection. In SPI communication, there is a Master and a Slave. The master decides which operation to perform, and the slave accepts the command.
+<details>
+
+<summary>pins</summary>
+
+![SPI](../assets/esp32-cam-spi.webp)
+
+</details>
+
+### Touch Pins
+The ESP32-CAM has 7 internal capacitive touch sensing GPIOs, which can detect changes in anything that contains charge, such as human skin. When anything possessing charge comes to proximity, it can sense and detect variations in capacitance.
+A capacitive touchpad can be made by attaching any conducting material to these pins, which can replace mechanical buttons.
+
+<details>
+
+<summary>pins</summary>
+
+![Touch](../assets/esp32-cam-touch.webp)
+
+</details>
+
+### PWM pins
+All the 10 GPIOs can be used as PWM pins, and they are operated by a PWM controller.  
+The PWM controller has a PWM operator, a dedicated capture submodule, and PWM timers. The PWM timer generates timing in independent or synchronous form, the operator generates the waveform for the channel and the capture submodule captures events with external timing.
+
+<details>
+
+<summary>pins</summary>
+
+![PWM](../assets/esp32-cam-pwm.webp)
+
+</details>
+
+### sources
+[ESP32 pinout guide](https://randomnerdtutorials.com/esp32-pinout-reference-gpios/),
+[Linux Hint](https://linuxhint.com/esp32-cam-pinout/), 
+[Random Nerd](https://randomnerdtutorials.com/esp32-cam-ai-thinker-pinout),
+as well as Abish Vijayan [Github](https://github.com/abish7643/ESP32Cam-I2CSensors) and his 
+[blog](https://3iinc.xyz/blog/how-to-use-i2c-sensor-bme280-with-esp32cam/)
+
 
 ## GPIO0 - CAM_PIN_XCLK or CSI_MCLK 
+GPIO 0 is a mode selection pin. When the GPIO0 is connected to the ground to make it low, it enables the flash mode. In flash mode, the code is flashed to the board. To disable the flash mode, the connection of this pin with the GND pin is removed. The microcontroller returns to the normal program execution mode.
+
 * Pull to ground (at reset) to put board into flash mode
 * Internally has a 3.3v 10k pullup resistor (R19)
 * CSI_MCLK is used by Camera (line 12 on FPC) 
@@ -81,7 +211,10 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 * Signal: EMAC_RXD2 - Ethernet MAC MII/RII interface
 * designated as I1? (input only?) 
 
-## GPIO4 - HS_DATA1 
+## GPIO4 - HS_DATA1  - Flashlight
+ESP-32 CAM has an inbuilt flash LED light. This is used to take pictures in the dark. This flashlight is connected to the GPIO4 pin. The GPIO 4 pin is also connected to the micro-SD card, so it needs to be programmed well when using both functions together  – the flashlight will light up when using the microSD card (see note).
+
+
 * Used by SD Card
 * has a 47Kohm resistor (R11) on the SD1/MicroSD line
 * connected to onboard 3030 SMD LED (Flashlight) 
@@ -91,13 +224,19 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 * Signal: EMAC_TX_ER - Ethernet MAC MII/RII interface
 * listed in ESP32_S datasheet as "RTC_Function2" I2C_SCL
 * designated as a (wpd) "weak pull down" by ESP32_S datasheet v3.4 pg53 IO/Mux Addendum
-* 1-bit SD Card 'hack' initialize the microSD card as follows, then the microSD card won’t use the GPIO4, GPIO12, GPIO13 data lines (HS_DATA1, HS_DATA2, HS_DATA3 respectively)!  
+  
+**Note** :  if you initialize the microSD card as follows, you won’t have this problem because the microSD card won’t use that data line.*
+
+1-bit SD Card 'hack' initialize the microSD card as follows, then the microSD card won’t use the GPIO4, GPIO12, GPIO13 data lines (HS_DATA1, HS_DATA2, HS_DATA3 respectively)!  
   ```
   // enable SD_MMC in menuconfig > Arduino section
   #include "SD_MMC.h"
   ...
   SD_MMC.begin("/sdcard", true)
   ```
+  
+  The LED will not make that flash effect. However, the LED remains on with low brightness.
+  
   https://randomnerdtutorials.com/esp32-cam-ai-thinker-pinout/ 
 
 ## GPIO5 - (not exposed)
@@ -258,7 +397,8 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 * If this is on, the WIFI won't work. 
 * ADC1_CH5
 * also RTC_GPIO8
-
+* That LED works with inverted logic, so you send a `LOW` signal to turn it on and a `HIGH` signal to turn it off.
+* 
 ## GPIO34 - (not exposed)
 * esp_camera.h:CAM_PIN_D6 -> Camera FPC Y8
 * Analog pin name: VDET_1
@@ -292,20 +432,3 @@ However pins listed as "not exposed" could be accessible using a soldering iron,
 * Analog pin name: SENSOR_VN
 * ADC1_CH3
 * also RTC_GPIO3
-
-## GPIO General Purpose
-According to the ESP32_S docs "Any GPIO Pins" can be used to:
-
-* Motor PWM 
-* Three channels of 16bit timers generate PWM waveforms, three fault detection signals, three event capture signals, three sync signals
-* Two UART Devices with hardware flow control & DMA
-* I2C
-* devices in slave or master mode
-* I2S
-* Stereo input/output, Parallel LCD data output, Parallel Camera Data input
-* Infrared Remote Controller
-* Eight channels for an IR transmitter & receiver of various waveforms
-* General Purpose SPI
-* LED PWM (16 independent channels @80mhz with duty accuracy of 16bits), 
-* Pulse Counter (pcnt_sig_ch[0-1]_in[0-7])
-* Signals: EMAC_MDC_out, EMAC_MDI_in, EMAC_MDO_out, EMAC_CRS_out, EMAC_COL_out - Ethernet MAC MII/RII interface
